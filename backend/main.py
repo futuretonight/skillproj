@@ -555,6 +555,19 @@ def get_market_skill_demand():
     return demands
 
 
+@app.get("/download-presentation")
+def download_presentation():
+    """Serves the generated 6-slide presentation deck."""
+    ppt_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "sih project.pptx"))
+    if os.path.exists(ppt_path):
+        return FileResponse(
+            ppt_path,
+            filename="sih project.pptx",
+            media_type="application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        )
+    raise HTTPException(status_code=404, detail="Presentation file not found")
+
+
 # ---------------------------------------------------------------------------
 # SERVE FRONTEND APPLICATION
 # ---------------------------------------------------------------------------

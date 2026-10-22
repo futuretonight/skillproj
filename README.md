@@ -1,8 +1,8 @@
 # SkillBridge AI (SkillTrack)
 ### AI-Powered Skill Gap Analysis & Employment Outcome Tracking Platform
 
-> **Smart India Hackathon (SIH) 2026 Prototype & Reference Implementation**  
-> *Theme: Education and Skill Development / Employment Efficacy Tracking*
+> **Comprehensive Employment & Skilling Impact Intelligence Platform**  
+> *Connecting Education, Capability Development, and Verified Industry Outcomes*
 
 ---
 
@@ -33,9 +33,23 @@ Every decision in SkillBridge AI directly answers one of five core questions:
 
 ---
 
-## 🏆 One-Line Elevator Pitch for Judges
+## 💡 Core Platform Vision
 
 > **“Our platform analyzes a person's existing skills against the skills required for their target job, identifies skill gaps, recommends personalized training, measures skill improvement, and tracks the resulting employment outcomes.”**
+
+---
+
+## 📊 Presentation Deck
+
+A complete 6-slide widescreen presentation deck is available directly in the repository:
+* **File:** [`sih project.pptx`](file:///C:/Users/yajath%20krushna/Documents/vscode%20projects/skillproj/sih%20project.pptx)
+* **Slides Overview:**
+  1. Title & Executive Summary
+  2. The Problem Statement & The 5-Question Framework
+  3. Proposed Solution & The Complete Skilling Value Chain
+  4. Technical Architecture & Transparent Impact Scoring Formula
+  5. Multi-Tier Impact Portals & Macro Policy Funnel
+  6. Case Study ("Rahul's Journey") & Technical Feasibility
 
 ---
 

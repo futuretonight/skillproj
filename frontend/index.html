@@ -38,7 +38,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="text-xl font-extrabold tracking-tight">SkillBridge <span class="text-amber-400">AI</span></span>
-            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-800 text-indigo-200 border border-indigo-700">SIH 2026 Edition</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-800 text-indigo-200 border border-indigo-700">Platform v2.0</span>
           </div>
           <p class="text-xs text-indigo-200 font-medium">Employment & Skilling Impact Intelligence Platform</p>
         </div>
@@ -58,8 +58,8 @@
         <button onclick="switchTab('market')" id="nav-market" class="tab-btn px-4 py-2 rounded-lg transition-all text-indigo-200 hover:text-white flex items-center gap-2">
           <i class="fa-solid fa-bolt"></i> Market Demand
         </button>
-        <button onclick="switchTab('presentation')" id="nav-presentation" class="tab-btn px-4 py-2 rounded-lg transition-all text-amber-300 hover:text-amber-200 flex items-center gap-2">
-          <i class="fa-solid fa-award"></i> SIH Pitch & Flow
+        <button onclick="switchTab('presentation')" id="nav-presentation" class="tab-btn px-4 py-2 rounded-lg transition-all text-indigo-200 hover:text-white flex items-center gap-2">
+          <i class="fa-solid fa-cubes"></i> Platform Architecture
         </button>
       </nav>
     </div>
@@ -82,11 +82,19 @@
             Analyze your existing skills against industry requirements, eliminate blind spots with personalized learning pathways, validate your skill gains with pre/post assessments, and get matched to relevant careers.
           </p>
         </div>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <button onclick="loadRahulDemo()" class="px-5 py-2.5 rounded-xl bg-amber-400 text-slate-900 font-bold text-sm shadow-md hover:bg-amber-300 transition-all flex items-center gap-2">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Load Rahul's Demo Story
-          </button>
-          <button onclick="document.getElementById('nlp-modal').classList.remove('hidden')" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition-all flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <div class="inline-flex rounded-xl shadow-sm bg-white/10 p-1 border border-white/20">
+            <button onclick="loadSampleProfile('rahul')" title="Load Rahul (Data Analyst)" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white hover:bg-white/20 transition-all">
+              <i class="fa-solid fa-user"></i> Rahul (Data)
+            </button>
+            <button onclick="loadSampleProfile('priya')" title="Load Priya (Frontend)" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white hover:bg-white/20 transition-all">
+              <i class="fa-solid fa-user"></i> Priya (Web)
+            </button>
+            <button onclick="loadSampleProfile('amit')" title="Load Amit (ML)" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white hover:bg-white/20 transition-all">
+              <i class="fa-solid fa-user"></i> Amit (AI/ML)
+            </button>
+          </div>
+          <button onclick="document.getElementById('nlp-modal').classList.remove('hidden')" class="px-4 py-2 rounded-xl bg-amber-400 text-slate-900 font-bold text-xs shadow-md hover:bg-amber-300 transition-all flex items-center gap-1.5">
             <i class="fa-solid fa-file-invoice"></i> Paste Resume (NLP)
           </button>
         </div>
@@ -372,7 +380,7 @@
         </div>
       </div>
 
-      <!-- THE 4-STAGE SKILLING FUNNEL (The core SIH requirement!) -->
+      <!-- THE 4-STAGE SKILLING FUNNEL -->
       <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
         <div class="flex items-center justify-between pb-2 border-b border-slate-100">
           <div>
@@ -493,7 +501,7 @@
           <div class="space-y-2 text-xs text-slate-600">
             <p class="flex items-center gap-2">
               <i class="fa-solid fa-check text-emerald-500"></i>
-              <strong>Why 35% on Skill Improvement?</strong> Ensures training institutions are judged on genuine capability gains rather than pass-through certificates.
+              <strong>Why 35% on Skill Improvement?</strong> Ensures training institutions are evaluated on genuine capability gains rather than pass-through certificates.
             </p>
             <p class="flex items-center gap-2">
               <i class="fa-solid fa-check text-emerald-500"></i>
@@ -593,15 +601,15 @@
     </div>
 
     <!-- ================================================================= -->
-    <!-- 5. SIH PRESENTATION PITCH & SYSTEM ARCHITECTURE -->
+    <!-- 5. PLATFORM OVERVIEW & SYSTEM ARCHITECTURE -->
     <!-- ================================================================= -->
     <div id="tab-presentation" class="tab-content hidden space-y-8">
       
       <!-- One-line elevator pitch -->
       <div class="bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl p-6 text-slate-950 shadow-xl space-y-2">
         <div class="flex items-center gap-2">
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-slate-900 text-amber-300">JUDGE ELEVATOR PITCH</span>
-          <span class="text-xs font-bold text-slate-900 uppercase">One-Sentence Summary</span>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-slate-900 text-amber-300">CORE PLATFORM VISION</span>
+          <span class="text-xs font-bold text-slate-900 uppercase">Executive Summary</span>
         </div>
         <p class="text-xl sm:text-2xl font-black leading-snug">
           “Our platform analyzes a person's existing skills against the skills required for their target job, identifies skill gaps, recommends personalized training, measures skill improvement, and tracks the resulting employment outcomes.”
@@ -610,7 +618,12 @@
 
       <!-- The 5-Question Framework -->
       <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
-        <h3 class="text-lg font-bold text-slate-900">The 5-Question SIH Problem Framework</h3>
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-bold text-slate-900">The 5-Question Framework</h3>
+          <a href="/download-presentation" class="px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-xs font-bold text-indigo-700 flex items-center gap-1.5">
+            <i class="fa-solid fa-file-powerpoint text-amber-600"></i> Download 6-Slide Presentation (.pptx)
+          </a>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-sm">
           <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-2">
             <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">1</span>
@@ -764,19 +777,40 @@
       if (tabId === 'market') renderMarketDemandDashboard();
     }
 
-    // Load Rahul's Story (from prompt specification)
-    function loadRahulDemo() {
-      document.getElementById('trainee-name').value = "Rahul Sharma";
-      document.getElementById('trainee-edu').value = "B.Tech";
-      document.getElementById('trainee-branch').value = "Computer Science";
-      document.getElementById('trainee-skills').value = "Python, Basic SQL, Excel";
-      document.getElementById('target-role-select').value = "Data Analyst";
+    // Load Sample Mock Candidate Profile
+    function loadSampleProfile(type = 'rahul') {
+      if (type === 'priya') {
+        document.getElementById('trainee-name').value = "Priya Patil";
+        document.getElementById('trainee-edu').value = "BCA";
+        document.getElementById('trainee-branch').value = "Computer Applications";
+        document.getElementById('trainee-skills').value = "HTML, CSS, JavaScript";
+        document.getElementById('target-role-select').value = "Web Developer / Frontend";
+        currentSkills = { "html": 80, "css": 75, "javascript": 60, "react": 20, "git": 30 };
+      } else if (type === 'amit') {
+        document.getElementById('trainee-name').value = "Amit Verma";
+        document.getElementById('trainee-edu').value = "B.Tech";
+        document.getElementById('trainee-branch').value = "Information Technology";
+        document.getElementById('trainee-skills').value = "Python, Statistics, basic ML";
+        document.getElementById('target-role-select').value = "Machine Learning Engineer";
+        currentSkills = { "python": 75, "statistics": 60, "machine learning": 45, "deep learning": 15, "docker": 10 };
+      } else {
+        document.getElementById('trainee-name').value = "Rahul Sharma";
+        document.getElementById('trainee-edu').value = "B.Tech";
+        document.getElementById('trainee-branch').value = "Computer Science";
+        document.getElementById('trainee-skills').value = "Python, Basic SQL, Excel";
+        document.getElementById('target-role-select').value = "Data Analyst";
+        currentSkills = { "python": 65, "sql": 40, "excel": 30, "statistics": 25, "power bi": 10 };
+      }
 
-      currentSkills = { "python": 65, "sql": 40, "excel": 30, "statistics": 25, "power bi": 10 };
       isTrainingSimulated = false;
       runSkillGapAnalysis();
       renderBeforeAfterComparison();
       fetchJobMatches();
+    }
+
+    // Alias for compatibility
+    function loadRahulDemo() {
+      loadSampleProfile('rahul');
     }
 
     // Save Profile & Run Gap Analysis
