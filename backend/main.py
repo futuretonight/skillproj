@@ -105,31 +105,60 @@ def create_or_update_trainee_profile(profile: TraineeProfileCreate):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Insert or update user
-    cursor.execute("""
-    INSERT INTO users (name, email, age_group, location, education, branch, graduation_year, experience_years, interests, target_role)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (
-        profile.name,
-        profile.email or f"{profile.name.lower().replace(' ', '.')}@example.com",
-        profile.age_group,
-        profile.location,
-        profile.education,
-        profile.branch,
-        profile.graduation_year,
-        profile.experience_years,
-        json.dumps(profile.interests),
-        profile.target_role
-    ))
-    user_id = cursor.lastrowid
+    user_email = profile.email or f"{profile.name.lower().replace(' ', '.')}@example.com"
 
-    # Add initial skills
+    # Check if user already exists
+    cursor.execute("SELECT id FROM users WHERE email = ?", (user_email,))
+    existing = cursor.fetchone()
+
+    if existing:
+        user_id = existing["id"]
+        cursor.execute("""
+        UPDATE users 
+        SET name = ?, age_group = ?, location = ?, education = ?, branch = ?, 
+            graduation_year = ?, experience_years = ?, interests = ?, target_role = ?
+        WHERE id = ?
+        """, (
+            profile.name,
+            profile.age_group,
+            profile.location,
+            profile.education,
+            profile.branch,
+            profile.graduation_year,
+            profile.experience_years,
+            json.dumps(profile.interests),
+            profile.target_role,
+            user_id
+        ))
+    else:
+        cursor.execute("""
+        INSERT INTO users (name, email, age_group, location, education, branch, graduation_year, experience_years, interests, target_role)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            profile.name,
+            user_email,
+            profile.age_group,
+            profile.location,
+            profile.education,
+            profile.branch,
+            profile.graduation_year,
+            profile.experience_years,
+            json.dumps(profile.interests),
+            profile.target_role
+        ))
+        user_id = cursor.lastrowid
+
+    # Add or update skills
     for skill in profile.skills:
         clean_skill = skill.strip().lower()
         cursor.execute("""
-        INSERT INTO user_skills (user_id, skill_name, proficiency, score, verified)
-        VALUES (?, ?, 'Beginner', 50, 0)
+        SELECT id FROM user_skills WHERE user_id = ? AND skill_name = ?
         """, (user_id, clean_skill))
+        if not cursor.fetchone():
+            cursor.execute("""
+            INSERT INTO user_skills (user_id, skill_name, proficiency, score, verified)
+            VALUES (?, ?, 'Beginner', 50, 0)
+            """, (user_id, clean_skill))
 
     conn.commit()
     conn.close()
@@ -137,7 +166,7 @@ def create_or_update_trainee_profile(profile: TraineeProfileCreate):
     return {
         "status": "success",
         "user_id": user_id,
-        "message": "Trainee profile created successfully",
+        "message": "Trainee profile saved successfully",
         "profile": profile.model_dump()
     }
 
@@ -551,3 +580,17 @@ else:
             "message": "Welcome to SkillTrack / SkillBridge AI!",
             "status": "Backend running. Create frontend folder for UI."
         }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    import webbrowser
+    import threading
+    import time
+
+    def _open():
+        time.sleep(1.2)
+        webbrowser.open("http://localhost:8000")
+
+    threading.Thread(target=_open, daemon=True).start()
+    uvicorn.run(app, host="127.0.0.1", port=8000)

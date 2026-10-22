@@ -84,43 +84,39 @@ Designed specifically for institutional and state-level policy makers to evaluat
 
 ---
 
-## 🚀 Quickstart Guide
+## 🚀 Super Simple Localhost Run (One-Click)
 
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+You don't need complicated commands to run this locally! Choose any of these 3 easy methods:
 
-### 2. Run the Application
-From the project root:
-```bash
-python -m uvicorn backend.main:app --reload --port 8000
-```
-Or from the `backend` folder:
-```bash
-cd backend
-python -m uvicorn main:app --reload --port 8000
-```
+### Method 1: Just Double-Click (Easiest for Windows)
+Double-click the **`run.bat`** file in the project folder.
+It will automatically start the server and open your browser!
 
-### 3. Open in Browser
-Visit:
+### Method 2: Single Python Command
+Open your terminal in this folder and run:
+```bash
+python run.py
 ```
-http://localhost:8000/
-```
-Interactive Swagger API documentation:
-```
-http://localhost:8000/docs
+*(This starts the backend and automatically opens `http://localhost:8000` in your default browser).*
+
+### Method 3: Direct Script
+```bash
+python backend/main.py
 ```
 
 ---
 
-## 🧪 Running Automated Tests
+### 🌐 Access URLs
+* **Web Application UI:** [http://localhost:8000](http://localhost:8000)
+* **Interactive API Docs (Swagger):** [http://localhost:8000/docs](http://localhost:8000/docs)
 
-Run the full end-to-end unit and integration test suite:
+---
+
+## 🧪 Running Automated Tests
+To run the full test suite verifying all 10 modules:
 ```bash
 python backend/test_suite.py
 ```
-*Tests verify NLP parsing, gap scoring, pathway sequencing, assessment grading, impact formulas, and all API endpoints.*
 
 ---
 
