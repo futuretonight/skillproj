@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBridge AI — Employment & Skilling Impact Platform</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(229, 231, 235, 0.8);
+    }
+    .funnel-step {
+      clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%, 5% 50%);
+    }
+    .first-funnel {
+      clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- TOP HEADER / NAV BAR -->
+  <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-indigo-400 flex items-center justify-center shadow-inner">
+          <i class="fa-solid fa-graduation-cap text-indigo-950 text-xl font-bold"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-extrabold tracking-tight">SkillBridge <span class="text-amber-400">AI</span></span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-800 text-indigo-200 border border-indigo-700">SIH 2026 Edition</span>
+          </div>
+          <p class="text-xs text-indigo-200 font-medium">Employment & Skilling Impact Intelligence Platform</p>
+        </div>
+      </div>
+
+      <!-- Navigation Pills -->
+      <nav class="flex items-center bg-indigo-950/60 p-1.5 rounded-xl border border-indigo-800/60 text-sm font-medium">
+        <button onclick="switchTab('trainee')" id="nav-trainee" class="tab-btn px-4 py-2 rounded-lg transition-all text-white bg-indigo-600 shadow-sm flex items-center gap-2">
+          <i class="fa-solid fa-user-graduate"></i> Trainee Portal
+        </button>
+        <button onclick="switchTab('government')" id="nav-government" class="tab-btn px-4 py-2 rounded-lg transition-all text-indigo-200 hover:text-white flex items-center gap-2">
+          <i class="fa-solid fa-landmark"></i> Government / Impact
+        </button>
+        <button onclick="switchTab('admin')" id="nav-admin" class="tab-btn px-4 py-2 rounded-lg transition-all text-indigo-200 hover:text-white flex items-center gap-2">
+          <i class="fa-solid fa-chart-line"></i> Admin / Provider
+        </button>
+        <button onclick="switchTab('market')" id="nav-market" class="tab-btn px-4 py-2 rounded-lg transition-all text-indigo-200 hover:text-white flex items-center gap-2">
+          <i class="fa-solid fa-bolt"></i> Market Demand
+        </button>
+        <button onclick="switchTab('presentation')" id="nav-presentation" class="tab-btn px-4 py-2 rounded-lg transition-all text-amber-300 hover:text-amber-200 flex items-center gap-2">
+          <i class="fa-solid fa-award"></i> SIH Pitch & Flow
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ================================================================= -->
+    <!-- 1. TRAINEE PORTAL -->
+    <!-- ================================================================= -->
+    <div id="tab-trainee" class="tab-content space-y-8">
+      
+      <!-- Intro Banner -->
+      <div class="bg-gradient-to-r from-indigo-700 via-indigo-800 to-purple-800 rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2">
+          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/20 text-indigo-100">End-to-End Trainee Journey</span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">From Skill Assessment to Verified Employment</h1>
+          <p class="text-indigo-200 text-sm max-w-2xl">
+            Analyze your existing skills against industry requirements, eliminate blind spots with personalized learning pathways, validate your skill gains with pre/post assessments, and get matched to relevant careers.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button onclick="loadRahulDemo()" class="px-5 py-2.5 rounded-xl bg-amber-400 text-slate-900 font-bold text-sm shadow-md hover:bg-amber-300 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Load Rahul's Demo Story
+          </button>
+          <button onclick="document.getElementById('nlp-modal').classList.remove('hidden')" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-file-invoice"></i> Paste Resume (NLP)
+          </button>
+        </div>
+      </div>
+
+      <!-- GRID: Profile & Target Selection -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left: Trainee Profile Card -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-id-badge"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800">Trainee Profile</h3>
+                <p class="text-xs text-slate-500">Academic & Skills Input</p>
+              </div>
+            </div>
+            <span id="profile-badge" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Active</span>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
+              <input type="text" id="trainee-name" value="Rahul Sharma" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Education</label>
+                <input type="text" id="trainee-edu" value="B.Tech" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Branch</label>
+                <input type="text" id="trainee-branch" value="Computer Science" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Current Known Skills (Comma separated)</label>
+              <input type="text" id="trainee-skills" value="Python, Basic SQL, Excel" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Target Job Role</label>
+              <select id="target-role-select" onchange="runSkillGapAnalysis()" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none font-semibold text-indigo-700 bg-indigo-50/50">
+                <option value="Data Analyst">Data Analyst</option>
+                <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+                <option value="Web Developer / Frontend">Web Developer / Frontend</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                <option value="Cloud / DevOps Engineer">Cloud / DevOps Engineer</option>
+              </select>
+            </div>
+          </div>
+
+          <button onclick="saveAndAnalyzeProfile()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-magnifying-glass-chart"></i> Run AI Skill Gap Analysis
+          </button>
+        </div>
+
+        <!-- Center: Job Readiness Meter & Gap Overview -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="font-bold text-slate-800">Job Readiness Score</h3>
+              <p class="text-xs text-slate-500" id="readiness-subtitle">Target: Data Analyst</p>
+            </div>
+            <div id="readiness-pill" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Developing</div>
+          </div>
+
+          <div class="flex flex-col items-center justify-center py-2">
+            <div class="relative w-40 h-40 flex items-center justify-center">
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <path class="text-slate-200" stroke-width="3.5" stroke="currentColor" fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path id="readiness-circle" class="text-indigo-600 transition-all duration-1000 ease-out" stroke-dasharray="48, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+              <div class="absolute flex flex-col items-center justify-center text-center">
+                <span id="readiness-val" class="text-3xl font-extrabold text-slate-800">48%</span>
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Job Match</span>
+              </div>
+            </div>
+            <p class="text-xs text-center text-slate-500 mt-2" id="readiness-hint">
+              Missing 3 core skills to meet the industry hiring threshold.
+            </p>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="grid grid-cols-2 gap-2 pt-2">
+            <button onclick="openAssessmentModal()" class="py-2 px-3 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-bold border border-emerald-200 transition-all flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-list-check"></i> Take Assessment
+            </button>
+            <button onclick="simulateTrainingCompletion()" class="py-2 px-3 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xs font-bold border border-indigo-200 transition-all flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-play"></i> Simulate Training
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Skill Gap Breakdown -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="font-bold text-slate-800">Skill Gap Diagnosis</h3>
+              <p class="text-xs text-slate-500">Benchmark vs Market Expectation</p>
+            </div>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600" id="gap-count-badge">6 Required</span>
+          </div>
+
+          <div class="space-y-3 overflow-y-auto max-h-56 pr-1" id="skill-gap-list">
+            <!-- Populated via JavaScript -->
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Matched</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> Developing</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span> Missing</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PERSONALIZED LEARNING PATHWAY SECTION -->
+      <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">Chronological Curriculum</span>
+              <h2 class="text-xl font-bold text-slate-900">Personalized Learning & Skilling Pathway</h2>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">
+              Custom-sequenced steps created by AI based on your specific missing skills, rather than generic course bundles.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <span class="text-slate-500">Pathway Progress:</span>
+            <div class="w-32 bg-slate-200 rounded-full h-3">
+              <div id="pathway-progress-bar" class="bg-indigo-600 h-3 rounded-full transition-all duration-700" style="width: 25%"></div>
+            </div>
+            <span id="pathway-progress-text" class="font-bold text-indigo-700">25%</span>
+          </div>
+        </div>
+
+        <!-- Pathway Stepper Cards -->
+        <div id="pathway-steps-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- BEFORE & AFTER SKILLING IMPACT COMPARISON -->
+      <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800">Measurable Skilling Impact</span>
+              <h2 class="text-xl font-bold text-slate-900">Before & After Assessment Impact</h2>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Testing candidate skills before and after training proves genuine skill acquisition (+Δ percentage points).
+            </p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-500">Average Improvement:</span>
+            <span id="avg-delta-badge" class="ml-2 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800">
+              +36.4 Percentage Points
+            </span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-y border-slate-200">
+              <tr>
+                <th class="py-3 px-4">Skill Domain</th>
+                <th class="py-3 px-4">Pre-Training (Before)</th>
+                <th class="py-3 px-4">Post-Training (After)</th>
+                <th class="py-3 px-4">Measurable Improvement</th>
+                <th class="py-3 px-4">Proficiency Status</th>
+              </tr>
+            </thead>
+            <tbody id="impact-comparison-rows" class="divide-y divide-slate-100">
+              <!-- Populated dynamically via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ACTIVE JOB MATCHES & OUTCOME REPORTING -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Job Matches (2 cols) -->
+        <div class="lg:col-span-2 glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="font-bold text-slate-800">Matched Career Opportunities</h3>
+              <p class="text-xs text-slate-500">Positions unlocked based on your current Job Readiness score</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700">Real-time Matching</span>
+          </div>
+
+          <div id="job-matches-list" class="space-y-3">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Outcome Reporting Form -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="font-bold text-slate-800">Report Employment Outcome</h3>
+              <p class="text-xs text-slate-500">Track longitudinal career placement</p>
+            </div>
+            <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+              <i class="fa-solid fa-briefcase"></i>
+            </span>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Employment Status</label>
+              <select id="outcome-status" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                <option value="employed">Employed (Full-Time)</option>
+                <option value="internship">Internship</option>
+                <option value="seeking">Seeking Opportunities</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Hiring Company</label>
+              <input type="text" id="outcome-company" value="InfoMetrics Analytics" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Designation / Role</label>
+              <input type="text" id="outcome-role" value="Junior Data Analyst" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Package (LPA)</label>
+                <input type="number" step="0.1" id="outcome-salary" value="6.2" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Time to Job (Mos)</label>
+                <input type="number" step="0.1" id="outcome-months" value="2.8" class="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              </div>
+            </div>
+            <div class="flex items-center gap-2 pt-1">
+              <input type="checkbox" id="outcome-relevant" checked class="w-4 h-4 text-indigo-600 rounded">
+              <label for="outcome-relevant" class="text-xs font-medium text-slate-700">Role is directly relevant to training</label>
+            </div>
+          </div>
+
+          <button onclick="submitEmploymentOutcome()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 text-sm">
+            <i class="fa-solid fa-circle-check"></i> Submit & Verify Outcome
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- 2. GOVERNMENT / INSTITUTION IMPACT PORTAL -->
+    <!-- ================================================================= -->
+    <div id="tab-government" class="tab-content hidden space-y-8">
+      
+      <!-- Flagship Header -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-indigo-800/40">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-400 text-slate-900 font-bold">Policy & Governance</span>
+            <span class="text-xs text-indigo-300">National Skilling Efficacy Monitor</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Macro Skilling & Employment Impact Dashboard</h1>
+          <p class="text-indigo-200 text-sm max-w-2xl">
+            Going beyond raw certificate issuance. Providing state and central governments with transparent evidence of actual skill enhancement, career retention, and relevant employment.
+          </p>
+        </div>
+        <div class="flex flex-col items-center bg-indigo-900/60 border border-indigo-700/60 p-4 rounded-xl text-center min-w-[200px]">
+          <span class="text-xs uppercase tracking-wider text-indigo-300 font-semibold">Skilling Impact Score</span>
+          <span id="gov-impact-score" class="text-4xl font-black text-amber-400 my-1">82.4</span>
+          <span class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+            <i class="fa-solid fa-arrow-trend-up"></i> Top Decile Impact
+          </span>
+        </div>
+      </div>
+
+      <!-- THE 4-STAGE SKILLING FUNNEL (The core SIH requirement!) -->
+      <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div>
+            <h2 class="text-lg font-bold text-slate-800">The 4-Stage Trainee Impact Funnel</h2>
+            <p class="text-xs text-slate-500">Tracking 10,000 enrolled candidates across the complete value chain</p>
+          </div>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded bg-indigo-50 text-indigo-700 border border-indigo-200">Cohort 2025-2026</span>
+        </div>
+
+        <!-- Visual Funnel Pipeline -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-white text-center font-bold pt-2">
+          
+          <!-- Funnel 1: Enrolled -->
+          <div class="bg-indigo-700 p-4 rounded-xl shadow-md space-y-1 relative overflow-hidden">
+            <span class="text-[10px] uppercase tracking-wider text-indigo-200 font-semibold block">Stage 1</span>
+            <div class="text-3xl font-black" id="funnel-enrolled">10,000</div>
+            <div class="text-xs font-medium text-indigo-100">Enrolled Trainees</div>
+            <div class="text-[10px] text-indigo-300 mt-2 pt-2 border-t border-indigo-600/60">Base Cohort (100%)</div>
+          </div>
+
+          <!-- Funnel 2: Completed -->
+          <div class="bg-indigo-800 p-4 rounded-xl shadow-md space-y-1 relative overflow-hidden">
+            <span class="text-[10px] uppercase tracking-wider text-indigo-200 font-semibold block">Stage 2</span>
+            <div class="text-3xl font-black text-amber-300" id="funnel-completed">8,200</div>
+            <div class="text-xs font-medium text-indigo-100">Completed Training</div>
+            <div class="text-[10px] text-amber-300/90 mt-2 pt-2 border-t border-indigo-700/60">82.0% Completion Rate</div>
+          </div>
+
+          <!-- Funnel 3: Skill Improved -->
+          <div class="bg-purple-800 p-4 rounded-xl shadow-md space-y-1 relative overflow-hidden">
+            <span class="text-[10px] uppercase tracking-wider text-purple-200 font-semibold block">Stage 3</span>
+            <div class="text-3xl font-black text-cyan-300" id="funnel-improved">6,000</div>
+            <div class="text-xs font-medium text-purple-100">Measurable Skill Gain</div>
+            <div class="text-[10px] text-cyan-300/90 mt-2 pt-2 border-t border-purple-700/60">73.2% Post-Test Verified</div>
+          </div>
+
+          <!-- Funnel 4: Placed in Relevant Jobs -->
+          <div class="bg-emerald-700 p-4 rounded-xl shadow-md space-y-1 relative overflow-hidden">
+            <span class="text-[10px] uppercase tracking-wider text-emerald-200 font-semibold block">Stage 4</span>
+            <div class="text-3xl font-black text-amber-300" id="funnel-placed">3,500</div>
+            <div class="text-xs font-medium text-emerald-100">Relevant Employment</div>
+            <div class="text-[10px] text-emerald-200 mt-2 pt-2 border-t border-emerald-600/60">58.3% Relevant Placement</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- KEY GOVERNMENT METRIC SCORECARDS -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        
+        <div class="glass-card rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between text-slate-500 mb-2">
+            <span class="text-xs font-semibold uppercase">Employment Rate</span>
+            <i class="fa-solid fa-briefcase text-indigo-600"></i>
+          </div>
+          <div class="text-2xl font-black text-slate-900" id="gov-emp-rate">68.2%</div>
+          <p class="text-[11px] text-slate-500 mt-1">Of completed cohort hired</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between text-slate-500 mb-2">
+            <span class="text-xs font-semibold uppercase">Job Relevance</span>
+            <i class="fa-solid fa-bullseye text-emerald-600"></i>
+          </div>
+          <div class="text-2xl font-black text-emerald-600" id="gov-rel-rate">78.4%</div>
+          <p class="text-[11px] text-slate-500 mt-1">Jobs match training domain</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between text-slate-500 mb-2">
+            <span class="text-xs font-semibold uppercase">Time to Employment</span>
+            <i class="fa-solid fa-stopwatch text-amber-600"></i>
+          </div>
+          <div class="text-2xl font-black text-slate-900" id="gov-avg-time">3.1 mos</div>
+          <p class="text-[11px] text-slate-500 mt-1">Average placement latency</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between text-slate-500 mb-2">
+            <span class="text-xs font-semibold uppercase">Avg Skill Growth</span>
+            <i class="fa-solid fa-chart-line text-purple-600"></i>
+          </div>
+          <div class="text-2xl font-black text-purple-600" id="gov-avg-growth">+34.5 pts</div>
+          <p class="text-[11px] text-slate-500 mt-1">Standardized assessment gain</p>
+        </div>
+
+      </div>
+
+      <!-- CHARTS ROW: Sector Breakdown & Formula Explanation -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Sector Distribution Chart -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <h3 class="font-bold text-slate-800">Employment Distribution by Sector</h3>
+            <span class="text-xs text-slate-500">Industry Alignment</span>
+          </div>
+          <div class="h-64 flex items-center justify-center">
+            <canvas id="sectorChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Transparent Formula Card -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4 flex flex-col justify-between">
+          <div class="pb-2 border-b border-slate-100">
+            <h3 class="font-bold text-slate-800">Transparent Skilling Impact Score Formula</h3>
+            <p class="text-xs text-slate-500">Documented, audit-ready weighted mathematical formulation</p>
+          </div>
+
+          <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs space-y-2">
+            <p class="text-amber-400 font-bold">Skilling Impact Score =</p>
+            <p class="pl-4">0.35 × (Avg Skill Improvement %)</p>
+            <p class="pl-4">+ 0.25 × (Course Completion Rate %)</p>
+            <p class="pl-4">+ 0.25 × (Job Relevance Rate %)</p>
+            <p class="pl-4">+ 0.15 × (Overall Employment Rate %)</p>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-600">
+            <p class="flex items-center gap-2">
+              <i class="fa-solid fa-check text-emerald-500"></i>
+              <strong>Why 35% on Skill Improvement?</strong> Ensures training institutions are judged on genuine capability gains rather than pass-through certificates.
+            </p>
+            <p class="flex items-center gap-2">
+              <i class="fa-solid fa-check text-emerald-500"></i>
+              <strong>Why 25% on Job Relevance?</strong> Discourages placing certified AI/Data students into unrelated gig/delivery roles solely to artificially inflate counts.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- 3. ADMIN / TRAINING PROVIDER PORTAL -->
+    <!-- ================================================================= -->
+    <div id="tab-admin" class="tab-content hidden space-y-8">
+      
+      <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Training Provider & Cohort Management</h2>
+          <p class="text-xs text-slate-500">Monitor active student batches, completion milestones, and course effectiveness</p>
+        </div>
+        <button onclick="fetchAdminData()" class="px-3.5 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-bold border border-indigo-200 hover:bg-indigo-100 flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate"></i> Refresh Metrics
+        </button>
+      </div>
+
+      <!-- Admin Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="glass-card rounded-2xl p-5 shadow-sm border border-slate-200">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Total Registered Learners</span>
+          <div class="text-2xl font-black text-slate-900 mt-1" id="admin-total-learners">26</div>
+          <span class="text-[11px] text-emerald-600 font-semibold">Active in 6 pathways</span>
+        </div>
+        <div class="glass-card rounded-2xl p-5 shadow-sm border border-slate-200">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Standardized Tests Conducted</span>
+          <div class="text-2xl font-black text-indigo-600 mt-1" id="admin-total-tests">52</div>
+          <span class="text-[11px] text-slate-500">Pre & Post test pairs</span>
+        </div>
+        <div class="glass-card rounded-2xl p-5 shadow-sm border border-slate-200">
+          <span class="text-xs font-semibold text-slate-500 uppercase">Average Course Completion</span>
+          <div class="text-2xl font-black text-purple-600 mt-1" id="admin-avg-comp">82.5%</div>
+          <span class="text-[11px] text-emerald-600 font-semibold">+6.2% above national benchmark</span>
+        </div>
+      </div>
+
+      <!-- Recent Learners Table -->
+      <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+        <h3 class="font-bold text-slate-800">Recent Learner Cohort Tracking</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="text-xs text-slate-500 uppercase bg-slate-50 border-y border-slate-200">
+              <tr>
+                <th class="py-3 px-4">Learner Name</th>
+                <th class="py-3 px-4">Degree / Education</th>
+                <th class="py-3 px-4">Target Role</th>
+                <th class="py-3 px-4">Employment Status</th>
+                <th class="py-3 px-4">Designation</th>
+                <th class="py-3 px-4">Relevance</th>
+              </tr>
+            </thead>
+            <tbody id="admin-learners-table" class="divide-y divide-slate-100">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- 4. LABOR MARKET DEMAND ANALYTICS -->
+    <!-- ================================================================= -->
+    <div id="tab-market" class="tab-content hidden space-y-8">
+      
+      <div class="pb-2 border-b border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900">Live Skill Demand & Industry Labor Trends</h2>
+        <p class="text-xs text-slate-500">Dynamic skill frequency derived from active job postings to prevent curriculum obsolescence</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+          <h3 class="font-bold text-slate-800">Job Posting Volume by Skill</h3>
+          <div class="h-72">
+            <canvas id="marketChart"></canvas>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+          <h3 class="font-bold text-slate-800">Top In-Demand Skills</h3>
+          <div class="space-y-3 overflow-y-auto max-h-72" id="market-demand-list">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- 5. SIH PRESENTATION PITCH & SYSTEM ARCHITECTURE -->
+    <!-- ================================================================= -->
+    <div id="tab-presentation" class="tab-content hidden space-y-8">
+      
+      <!-- One-line elevator pitch -->
+      <div class="bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl p-6 text-slate-950 shadow-xl space-y-2">
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-slate-900 text-amber-300">JUDGE ELEVATOR PITCH</span>
+          <span class="text-xs font-bold text-slate-900 uppercase">One-Sentence Summary</span>
+        </div>
+        <p class="text-xl sm:text-2xl font-black leading-snug">
+          “Our platform analyzes a person's existing skills against the skills required for their target job, identifies skill gaps, recommends personalized training, measures skill improvement, and tracks the resulting employment outcomes.”
+        </p>
+      </div>
+
+      <!-- The 5-Question Framework -->
+      <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+        <h3 class="text-lg font-bold text-slate-900">The 5-Question SIH Problem Framework</h3>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-sm">
+          <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">1</span>
+            <h4 class="font-bold text-slate-800">Current Skills</h4>
+            <p class="text-xs text-slate-600">What skills does this person currently have?</p>
+          </div>
+          <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">2</span>
+            <h4 class="font-bold text-slate-800">Job Requirements</h4>
+            <p class="text-xs text-slate-600">What skills are required for their target job?</p>
+          </div>
+          <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">3</span>
+            <h4 class="font-bold text-slate-800">Missing Gaps</h4>
+            <p class="text-xs text-slate-600">What specific skills are missing or underdeveloped?</p>
+          </div>
+          <div class="p-4 rounded-xl bg-indigo-50/70 border border-indigo-100 space-y-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">4</span>
+            <h4 class="font-bold text-slate-800">Targeted Skilling</h4>
+            <p class="text-xs text-slate-600">What personalized training sequence closes the gap?</p>
+          </div>
+          <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-2">
+            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">5</span>
+            <h4 class="font-bold text-emerald-950">Outcome Impact</h4>
+            <p class="text-xs text-emerald-800">Did that training actually improve skills & employment?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete System Flow Architecture -->
+      <div class="glass-card rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+        <h3 class="text-lg font-bold text-slate-900">Complete 10-Step Innovation Architecture</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs text-center font-medium">
+          <div class="p-3 rounded-lg bg-slate-100 border border-slate-200">1. User Registration & Profile</div>
+          <div class="p-3 rounded-lg bg-slate-100 border border-slate-200">2. NLP Resume / JD Parsing</div>
+          <div class="p-3 rounded-lg bg-slate-100 border border-slate-200">3. Diagnostic Assessment</div>
+          <div class="p-3 rounded-lg bg-slate-100 border border-slate-200">4. Target Role Selection</div>
+          <div class="p-3 rounded-lg bg-slate-100 border border-slate-200">5. AI Skill Gap Engine</div>
+          <div class="p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-800 font-bold">6. Sequential Pathway</div>
+          <div class="p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-800 font-bold">7. Course & Capstone Lab</div>
+          <div class="p-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-800 font-bold">8. Post-Training Test (Δ%)</div>
+          <div class="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">9. Job Matching Engine</div>
+          <div class="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">10. Longitudinal Impact Score</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- MODAL: NLP RESUME PARSER -->
+  <!-- ================================================================= -->
+  <div id="nlp-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+          <h3 class="font-bold text-slate-800">AI Resume Parser (NLP)</h3>
+        </div>
+        <button onclick="document.getElementById('nlp-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-600 mb-1">Paste Resume Text</label>
+        <textarea id="resume-text-input" rows="6" class="w-full p-3 rounded-xl border border-slate-300 text-xs font-mono focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Paste resume excerpt here... e.g. Rahul Sharma, B.Tech Computer Science, skills in Python, basic SQL, Pandas, Matplotlib, Excel. Built sales dashboard project..."></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2">
+        <button onclick="fillSampleResumeText()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200">
+          Load Sample Resume
+        </button>
+        <button onclick="parseResumeWithNLP()" class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm flex items-center gap-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Extract Skills & Populate Profile
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MODAL: INTERACTIVE ASSESSMENT -->
+  <!-- ================================================================= -->
+  <div id="quiz-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+            <i class="fa-solid fa-stopwatch"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-800" id="quiz-title">Diagnostic Skill Assessment</h3>
+            <p class="text-xs text-slate-500" id="quiz-subtitle">Testing skills for target job role</p>
+          </div>
+        </div>
+        <button onclick="closeAssessmentModal()" class="text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Quiz Questions Container -->
+      <div id="quiz-container" class="space-y-4">
+        <!-- Questions injected via JS -->
+      </div>
+
+      <!-- Quiz Result Container (Initially hidden) -->
+      <div id="quiz-result-container" class="hidden space-y-4">
+        <!-- Results injected via JS -->
+      </div>
+
+      <div class="flex justify-between items-center pt-3 border-t border-slate-100" id="quiz-actions">
+        <span class="text-xs text-slate-500" id="quiz-progress-text">Answer all questions to see score</span>
+        <button onclick="submitQuiz()" class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md">
+          Submit Assessment
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APPLICATION LOGIC -->
+  <script>
+    // State
+    let currentUserId = 1;
+    let currentSkills = { "python": 65, "sql": 40, "excel": 30, "statistics": 25, "power bi": 10 };
+    let currentTargetRole = "Data Analyst";
+    let isTrainingSimulated = false;
+    let quizData = [];
+    let sectorChartInstance = null;
+    let marketChartInstance = null;
+
+    // Tab Switcher
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+        el.classList.add('text-indigo-200');
+      });
+
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`nav-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-indigo-200');
+      }
+
+      if (tabId === 'government') renderGovernmentDashboard();
+      if (tabId === 'admin') fetchAdminData();
+      if (tabId === 'market') renderMarketDemandDashboard();
+    }
+
+    // Load Rahul's Story (from prompt specification)
+    function loadRahulDemo() {
+      document.getElementById('trainee-name').value = "Rahul Sharma";
+      document.getElementById('trainee-edu').value = "B.Tech";
+      document.getElementById('trainee-branch').value = "Computer Science";
+      document.getElementById('trainee-skills').value = "Python, Basic SQL, Excel";
+      document.getElementById('target-role-select').value = "Data Analyst";
+
+      currentSkills = { "python": 65, "sql": 40, "excel": 30, "statistics": 25, "power bi": 10 };
+      isTrainingSimulated = false;
+      runSkillGapAnalysis();
+      renderBeforeAfterComparison();
+      fetchJobMatches();
+    }
+
+    // Save Profile & Run Gap Analysis
+    async function saveAndAnalyzeProfile() {
+      const skillsInput = document.getElementById('trainee-skills').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+      
+      // Assign default scores to input skills
+      currentSkills = {};
+      skillsInput.forEach(s => {
+        currentSkills[s] = 45; // Default baseline
+      });
+
+      runSkillGapAnalysis();
+    }
+
+    // Run AI Skill Gap Analysis
+    async function runSkillGapAnalysis() {
+      const role = document.getElementById('target-role-select').value;
+      currentTargetRole = role;
+      document.getElementById('readiness-subtitle').textContent = `Target: ${role}`;
+
+      try {
+        const resp = await fetch('/api/skill-gap/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            target_role: role,
+            user_skills: currentSkills
+          })
+        });
+        const data = await resp.json();
+        renderSkillGapUI(data);
+        renderPathway(data);
+      } catch (err) {
+        console.error('Gap analysis error:', err);
+      }
+    }
+
+    function renderSkillGapUI(data) {
+      const readiness = data.job_readiness_percentage;
+      document.getElementById('readiness-val').textContent = `${readiness}%`;
+      document.getElementById('readiness-circle').setAttribute('stroke-dasharray', `${readiness}, 100`);
+
+      const pill = document.getElementById('readiness-pill');
+      if (readiness >= 75) {
+        pill.textContent = "Industry Ready";
+        pill.className = "px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800";
+        document.getElementById('readiness-hint').textContent = "Excellent! You meet the skill criteria for immediate interviews.";
+      } else if (readiness >= 50) {
+        pill.textContent = "Developing";
+        pill.className = "px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800";
+        document.getElementById('readiness-hint').textContent = "Moderate readiness. Focus on the red missing skills below.";
+      } else {
+        pill.textContent = "High Skill Gap";
+        pill.className = "px-3 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800";
+        document.getElementById('readiness-hint').textContent = "Significant gap. Follow your personalized pathway to prepare.";
+      }
+
+      // Render Breakdown List
+      const list = document.getElementById('skill-gap-list');
+      list.innerHTML = '';
+      data.skill_breakdown.forEach(item => {
+        let statusBadge = '';
+        let colorClass = '';
+        if (item.status === 'sufficient') {
+          statusBadge = '<span class="text-emerald-600 font-bold text-xs"><i class="fa-solid fa-circle-check"></i> Matched</span>';
+          colorClass = 'border-l-4 border-emerald-500 bg-emerald-50/40';
+        } else if (item.status === 'developing') {
+          statusBadge = `<span class="text-amber-600 font-bold text-xs"><i class="fa-solid fa-triangle-exclamation"></i> Dev (${item.user_score}/${item.required_score}%)</span>`;
+          colorClass = 'border-l-4 border-amber-500 bg-amber-50/40';
+        } else {
+          statusBadge = '<span class="text-rose-600 font-bold text-xs"><i class="fa-solid fa-circle-xmark"></i> Missing</span>';
+          colorClass = 'border-l-4 border-rose-500 bg-rose-50/40';
+        }
+
+        const div = document.createElement('div');
+        div.className = `p-2.5 rounded-lg border border-slate-200 flex items-center justify-between text-xs ${colorClass}`;
+        div.innerHTML = `
+          <div>
+            <div class="font-bold text-slate-800 capitalize">${item.skill}</div>
+            <div class="text-[11px] text-slate-500">Req: ${item.required_level} (Min ${item.required_score}%)</div>
+          </div>
+          <div>${statusBadge}</div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    // Render Personalized Learning Pathway
+    async function renderPathway(gapData) {
+      const container = document.getElementById('pathway-steps-container');
+      container.innerHTML = '<div class="text-xs text-slate-400 py-4 col-span-4 text-center">Generating sequential curriculum...</div>';
+
+      try {
+        const resp = await fetch('/api/learning-pathway', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            target_role: currentTargetRole,
+            missing_skills: gapData.missing_skills,
+            developing_skills: gapData.developing_skills
+          })
+        });
+        const data = await resp.json();
+
+        container.innerHTML = '';
+        data.pathway.forEach((step, idx) => {
+          const isDone = isTrainingSimulated || idx === 0;
+          const statusBg = isDone ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-white border-slate-200 text-slate-800';
+          const icon = isDone ? 'fa-check text-emerald-600' : 'fa-hourglass-start text-indigo-500';
+
+          const card = document.createElement('div');
+          card.className = `p-4 rounded-xl border ${statusBg} flex flex-col justify-between space-y-3 relative`;
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isDone ? 'bg-emerald-200 text-emerald-900' : 'bg-indigo-100 text-indigo-800'}">
+                  STEP ${step.step}
+                </span>
+                <span class="text-xs text-slate-400 font-semibold">${step.duration}</span>
+              </div>
+              <h4 class="font-bold text-sm text-slate-900">${step.title}</h4>
+              <p class="text-xs text-slate-600 mt-1">${step.description}</p>
+            </div>
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
+              <span class="font-semibold text-[11px] text-slate-500 uppercase">${step.type}</span>
+              <span class="flex items-center gap-1 font-bold ${isDone ? 'text-emerald-600' : 'text-slate-400'}">
+                <i class="fa-solid ${icon}"></i> ${isDone ? 'Completed' : 'Pending'}
+              </span>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+
+        // Update progress bar
+        const progress = isTrainingSimulated ? 100 : 25;
+        document.getElementById('pathway-progress-bar').style.width = `${progress}%`;
+        document.getElementById('pathway-progress-text').textContent = `${progress}%`;
+
+      } catch (err) {
+        console.error('Error fetching pathway:', err);
+      }
+    }
+
+    // Simulate Training (transforms scores from 48% to 85% with post-assessment)
+    function simulateTrainingCompletion() {
+      isTrainingSimulated = true;
+      // Upgrade skills post-training
+      currentSkills = {
+        "python": 82,
+        "sql": 78,
+        "excel": 85,
+        "statistics": 72,
+        "power bi": 70
+      };
+      runSkillGapAnalysis();
+      renderBeforeAfterComparison();
+      fetchJobMatches();
+      alert("🎉 Simulated Training Completed!\n\nAll courses in the pathway finished. Skills updated via post-training verification. Readiness increased to 82%!");
+    }
+
+    // Render Before/After Comparison Table
+    function renderBeforeAfterComparison() {
+      const tbody = document.getElementById('impact-comparison-rows');
+      tbody.innerHTML = '';
+
+      const comparisonData = [
+        { skill: "Python", before: 65, after: isTrainingSimulated ? 82 : 65 },
+        { skill: "SQL", before: 40, after: isTrainingSimulated ? 78 : 40 },
+        { skill: "Excel", before: 30, after: isTrainingSimulated ? 85 : 30 },
+        { skill: "Statistics", before: 25, after: isTrainingSimulated ? 72 : 25 },
+        { skill: "Power BI", before: 10, after: isTrainingSimulated ? 70 : 10 }
+      ];
+
+      let totalDelta = 0;
+
+      comparisonData.forEach(row => {
+        const delta = row.after - row.before;
+        totalDelta += delta;
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/50 transition-colors";
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-bold text-slate-800">${row.skill}</td>
+          <td class="py-3 px-4 font-semibold text-slate-600">${row.before}%</td>
+          <td class="py-3 px-4 font-bold ${row.after >= 75 ? 'text-emerald-600' : 'text-slate-800'}">${row.after}%</td>
+          <td class="py-3 px-4">
+            <span class="px-2.5 py-1 rounded-full text-xs font-black ${delta > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+              ${delta > 0 ? '+' + delta + ' pts' : 'Baseline'}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-xs font-semibold ${row.after >= 80 ? 'text-indigo-600' : 'text-slate-500'}">
+            ${row.after >= 80 ? 'Advanced' : (row.after >= 50 ? 'Intermediate' : 'Beginner')}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      const avgDelta = (totalDelta / comparisonData.length).toFixed(1);
+      document.getElementById('avg-delta-badge').textContent = `+${avgDelta} Percentage Points`;
+    }
+
+    // Fetch Job Matches
+    async function fetchJobMatches() {
+      const list = document.getElementById('job-matches-list');
+      try {
+        const resp = await fetch(`/api/job-matching/${currentUserId}`);
+        const jobs = await resp.json();
+
+        list.innerHTML = '';
+        jobs.slice(0, 3).forEach(job => {
+          const isEligible = job.readiness_percentage >= 70;
+          const div = document.createElement('div');
+          div.className = "p-4 rounded-xl border border-slate-200 bg-white shadow-sm flex items-center justify-between gap-4";
+          div.innerHTML = `
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="font-bold text-slate-900">${job.title}</h4>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isEligible ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                  ${job.readiness_percentage}% Match
+                </span>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5">Average Package: ₹${job.avg_salary_lpa} LPA • ${job.openings_count.toLocaleString()} Active Openings</p>
+            </div>
+            <button onclick="alert('Application forwarded with verified SkillBridge credential badge!')" class="px-4 py-2 rounded-xl text-xs font-bold ${isEligible ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-slate-100 text-slate-400 cursor-not-allowed'} transition-all">
+              ${isEligible ? 'Apply Now' : 'Complete Pathway'}
+            </button>
+          `;
+          list.appendChild(div);
+        });
+      } catch (err) {
+        console.error('Job match error:', err);
+      }
+    }
+
+    // Submit Employment Outcome
+    async function submitEmploymentOutcome() {
+      const payload = {
+        user_id: currentUserId,
+        status: document.getElementById('outcome-status').value,
+        company_name: document.getElementById('outcome-company').value,
+        job_role: document.getElementById('outcome-role').value,
+        salary_lpa: parseFloat(document.getElementById('outcome-salary').value),
+        time_to_employment_months: parseFloat(document.getElementById('outcome-months').value),
+        is_relevant: document.getElementById('outcome-relevant').checked
+      };
+
+      try {
+        const resp = await fetch('/api/outcomes/report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const res = await resp.json();
+        alert("✅ Employment Outcome Logged & Verified!\n\nThis placement is now registered in the institutional longitudinal cohort analytics.");
+      } catch (err) {
+        alert("Error saving outcome");
+      }
+    }
+
+    // NLP Resume Parser
+    function fillSampleResumeText() {
+      document.getElementById('resume-text-input').value = `
+Rahul Sharma
+Email: rahul.sharma@example.edu | Phone: +91 98765 43210
+Education: B.Tech in Computer Science and Engineering (2026)
+Skills: Python, Basic SQL, Excel, Pandas, Matplotlib, Data Visualization.
+Experience: Fresher, built a Retail Sales Data Analytics dashboard using Python and SQL.
+Interests: Data Analytics, Artificial Intelligence, Business Intelligence.
+      `.trim();
+    }
+
+    async function parseResumeWithNLP() {
+      const text = document.getElementById('resume-text-input').value;
+      if (!text) {
+        alert("Please paste resume text first");
+        return;
+      }
+
+      try {
+        const resp = await fetch('/api/nlp/parse-resume', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ resume_text: text })
+        });
+        const data = await resp.json();
+        const profile = data.data;
+
+        document.getElementById('trainee-edu').value = profile.education;
+        document.getElementById('trainee-branch').value = profile.branch;
+        document.getElementById('trainee-skills').value = profile.skills.join(', ');
+
+        document.getElementById('nlp-modal').classList.add('hidden');
+        alert(`✨ NLP Extracted ${profile.skills.length} skills: ${profile.skills.join(', ')}`);
+        saveAndAnalyzeProfile();
+      } catch (err) {
+        alert("Error parsing resume");
+      }
+    }
+
+    // Assessment Modal Logic
+    async function openAssessmentModal() {
+      document.getElementById('quiz-modal').classList.remove('hidden');
+      document.getElementById('quiz-result-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      document.getElementById('quiz-actions').classList.remove('hidden');
+
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '<div class="text-center py-4 text-xs text-slate-500">Loading diagnostic questions...</div>';
+
+      try {
+        const resp = await fetch('/api/assessments/questions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            skills: Object.keys(currentSkills),
+            count_per_skill: 2
+          })
+        });
+        const data = await resp.json();
+        quizData = data.questions;
+
+        container.innerHTML = '';
+        quizData.forEach((q, idx) => {
+          const card = document.createElement('div');
+          card.className = "p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-2.5";
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">${q.skill}</span>
+              <span class="text-xs text-slate-400">Q${idx+1} of ${quizData.length}</span>
+            </div>
+            <p class="font-semibold text-sm text-slate-800">${q.question}</p>
+            <div class="space-y-1.5 pt-1">
+              ${q.options.map(opt => `
+                <label class="flex items-center gap-2 p-2 rounded-lg bg-white border border-slate-200 hover:border-indigo-500 cursor-pointer text-xs font-medium text-slate-700">
+                  <input type="radio" name="quiz_${q.id}" value="${opt}" class="text-indigo-600">
+                  <span>${opt}</span>
+                </label>
+              `).join('')}
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Quiz error:', err);
+      }
+    }
+
+    function closeAssessmentModal() {
+      document.getElementById('quiz-modal').classList.add('hidden');
+    }
+
+    async function submitQuiz() {
+      const answers = {};
+      quizData.forEach(q => {
+        const selected = document.querySelector(`input[name="quiz_${q.id}"]:checked`);
+        if (selected) {
+          answers[q.id] = selected.value;
+        }
+      });
+
+      if (Object.keys(answers).length === 0) {
+        alert("Please answer at least one question before submitting.");
+        return;
+      }
+
+      try {
+        const resp = await fetch('/api/assessments/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_id: currentUserId,
+            assessment_type: isTrainingSimulated ? "after" : "before",
+            answers: answers
+          })
+        });
+        const res = await resp.json();
+
+        // Render Result View inside modal
+        document.getElementById('quiz-container').classList.add('hidden');
+        document.getElementById('quiz-actions').classList.add('hidden');
+        const resContainer = document.getElementById('quiz-result-container');
+        resContainer.classList.remove('hidden');
+
+        resContainer.innerHTML = `
+          <div class="p-6 rounded-2xl bg-indigo-50 border border-indigo-200 text-center space-y-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Assessment Result</span>
+            <div class="text-4xl font-black text-indigo-950">${res.score_percentage}%</div>
+            <p class="text-xs font-semibold text-slate-600">
+              Evaluated Level: <span class="text-indigo-700 font-bold">${res.proficiency_level}</span> (${res.correct_count} of ${res.total_questions} correct)
+            </p>
+          </div>
+          <div class="space-y-2 max-h-52 overflow-y-auto pr-1">
+            <h4 class="text-xs font-bold text-slate-700 uppercase">Question Breakdown</h4>
+            ${res.feedback.map(f => `
+              <div class="p-2.5 rounded-lg border text-xs ${f.is_correct ? 'border-emerald-200 bg-emerald-50/50' : 'border-rose-200 bg-rose-50/50'}">
+                <div class="font-semibold text-slate-800">${f.question}</div>
+                <div class="text-[11px] mt-1 ${f.is_correct ? 'text-emerald-700' : 'text-rose-700'}">
+                  Your answer: ${f.your_answer} ${f.is_correct ? '✓' : `(Correct: ${f.correct_answer})`}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <button onclick="closeAssessmentModal()" class="w-full py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold">
+            Close & Return to Dashboard
+          </button>
+        `;
+
+        // Update skill score in state
+        Object.entries(res.skill_scores).forEach(([skill, score]) => {
+          currentSkills[skill.toLowerCase()] = score;
+        });
+        runSkillGapAnalysis();
+
+      } catch (err) {
+        alert("Error submitting assessment");
+      }
+    }
+
+    // Render Government / Institution Dashboard
+    async function renderGovernmentDashboard() {
+      try {
+        const resp = await fetch('/api/analytics/government');
+        const data = await resp.json();
+
+        // Macro Funnel
+        document.getElementById('funnel-enrolled').textContent = data.macro_funnel.enrolled.toLocaleString();
+        document.getElementById('funnel-completed').textContent = data.macro_funnel.completed.toLocaleString();
+        document.getElementById('funnel-improved').textContent = data.macro_funnel.skill_improved.toLocaleString();
+        document.getElementById('funnel-placed').textContent = data.macro_funnel.placed_in_relevant_jobs.toLocaleString();
+
+        // KPIs
+        document.getElementById('gov-impact-score').textContent = data.impact_score_details.skilling_impact_score;
+        document.getElementById('gov-emp-rate').textContent = `${data.kpis.employment_rate_percent}%`;
+        document.getElementById('gov-rel-rate').textContent = `${data.kpis.job_relevance_percent}%`;
+        document.getElementById('gov-avg-time').textContent = `${data.kpis.avg_time_to_employment_months} mos`;
+        document.getElementById('gov-avg-growth').textContent = `+${data.kpis.avg_skill_improvement_delta} pts`;
+
+        // Render Sector Chart
+        renderSectorChart(data.sector_distribution);
+
+      } catch (err) {
+        console.error('Government dashboard error:', err);
+      }
+    }
+
+    function renderSectorChart(sectors) {
+      const ctx = document.getElementById('sectorChart').getContext('2d');
+      if (sectorChartInstance) sectorChartInstance.destroy();
+
+      const labels = sectors.map(s => s.role);
+      const counts = sectors.map(s => s.count);
+
+      sectorChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: counts,
+            backgroundColor: ['#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
+          }
+        }
+      });
+    }
+
+    // Fetch Admin Data
+    async function fetchAdminData() {
+      try {
+        const resp = await fetch('/api/analytics/admin');
+        const data = await resp.json();
+
+        document.getElementById('admin-total-learners').textContent = data.total_learners;
+        document.getElementById('admin-total-tests').textContent = data.total_assessments;
+        document.getElementById('admin-avg-comp').textContent = `${data.avg_cohort_completion_rate}%`;
+
+        const tbody = document.getElementById('admin-learners-table');
+        tbody.innerHTML = '';
+        data.recent_learners.forEach(l => {
+          const tr = document.createElement('tr');
+          tr.className = "hover:bg-slate-50";
+          tr.innerHTML = `
+            <td class="py-3 px-4 font-bold text-slate-800">${l.name}</td>
+            <td class="py-3 px-4 text-slate-600">${l.education || 'B.Tech'}</td>
+            <td class="py-3 px-4 font-semibold text-indigo-700">${l.target_role || 'Data Analyst'}</td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-xs font-semibold ${l.status === 'employed' ? 'bg-emerald-100 text-emerald-800' : (l.status === 'internship' ? 'bg-indigo-100 text-indigo-800' : 'bg-slate-100 text-slate-700')}">
+                ${l.status ? l.status.toUpperCase() : 'IN TRAINING'}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-slate-600">${l.job_role || '—'}</td>
+            <td class="py-3 px-4">
+              ${l.is_relevant ? '<span class="text-emerald-600 font-bold">✓ Relevant</span>' : '<span class="text-slate-400">—</span>'}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } catch (err) {
+        console.error('Admin fetch error:', err);
+      }
+    }
+
+    // Render Market Demand Dashboard
+    async function renderMarketDemandDashboard() {
+      try {
+        const resp = await fetch('/api/analytics/market-demand');
+        const demands = await resp.json();
+
+        const ctx = document.getElementById('marketChart').getContext('2d');
+        if (marketChartInstance) marketChartInstance.destroy();
+
+        marketChartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: demands.map(d => d.skill_name.toUpperCase()),
+            datasets: [{
+              label: 'Active Job Postings',
+              data: demands.map(d => d.job_postings_count),
+              backgroundColor: '#4f46e5',
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+              x: { grid: { display: false } }
+            }
+          }
+        });
+
+        // Demand List
+        const list = document.getElementById('market-demand-list');
+        list.innerHTML = '';
+        demands.forEach(d => {
+          const div = document.createElement('div');
+          div.className = "p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between text-xs";
+          div.innerHTML = `
+            <div>
+              <div class="font-bold text-slate-900 uppercase">${d.skill_name}</div>
+              <div class="text-[11px] text-slate-500">${d.category} • Avg: ₹${d.avg_salary_lpa} LPA</div>
+            </div>
+            <div class="text-right">
+              <span class="font-black text-indigo-600">${d.job_postings_count.toLocaleString()}</span>
+              <div class="text-[10px] text-emerald-600 font-semibold">+${d.growth_rate_percent}% YoY</div>
+            </div>
+          `;
+          list.appendChild(div);
+        });
+
+      } catch (err) {
+        console.error('Market demand error:', err);
+      }
+    }
+
+    // Initialize on page load
+    window.onload = function() {
+      loadRahulDemo();
+    };
+  </script>
+</body>
+</html>
